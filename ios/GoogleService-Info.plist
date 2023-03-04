@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>763754653581-ueqnlgl9pumtc74e602mh74dtmehmc74.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.763754653581-ueqnlgl9pumtc74e602mh74dtmehmc74</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>763754653581-kct57kikuoqk1i2fhplp1vdq49c7n234.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCdHUkd5ImE1g8S5hUHGfgduWBOcT2o6fo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>763754653581</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.onedigram.vipstor001</string>
+	<key>PROJECT_ID</key>
+	<string>vipstore-45738</string>
+	<key>STORAGE_BUCKET</key>
+	<string>vipstore-45738.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:763754653581:ios:8472368bf8e14396e17fc4</string>
+	<key>DATABASE_URL</key>
+	<string>https://vipstore-45738-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

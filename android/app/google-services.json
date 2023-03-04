@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "763754653581",
+    "firebase_url": "https://vipstore-45738-default-rtdb.firebaseio.com",
+    "project_id": "vipstore-45738",
+    "storage_bucket": "vipstore-45738.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763754653581:android:b73afac5e9321289e17fc4",
+        "android_client_info": {
+          "package_name": "com.onedigram.vipstor001"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "763754653581-kct57kikuoqk1i2fhplp1vdq49c7n234.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.onedigram.vipstor001",
+            "certificate_hash": "0c05711a42ba4f38be51b3051cbc6100436acd7d"
+          }
+        },
+        {
+          "client_id": "763754653581-97dmvvm4jm5q6khgjk6fdc67sqo8eb90.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtR4zmKPQ3FGLg-6B_QPQBx-4nsYGij8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "763754653581-97dmvvm4jm5q6khgjk6fdc67sqo8eb90.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "763754653581-ueqnlgl9pumtc74e602mh74dtmehmc74.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.onedigram.vipstor001"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

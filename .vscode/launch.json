@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "Flutter (7.4  Rollable API 30)",
+            "program": "lib/main.dart",
+            "deviceId": "emulator-5554",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
+}

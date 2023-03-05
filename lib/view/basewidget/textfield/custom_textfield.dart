@@ -73,14 +73,14 @@ class CustomTextField extends StatelessWidget {
       },
       decoration: InputDecoration(
         hintText: hintText ?? '',
+
         filled: fillColor != null,
         fillColor: fillColor,
         contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 15),
         isDense: true,
         counterText: '',
         //  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor)),
-        hintStyle:
-            titilliumRegular.copyWith(color: Theme.of(context).hintColor),
+        hintStyle: titilliumRegular.copyWith(color: Colors.black),
         errorStyle: TextStyle(height: 1.5),
         border: InputBorder.none,
       ),

@@ -57,9 +57,11 @@ Future<void> main() async {
       await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
   int _orderID;
   if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
-    _orderID = (notificationAppLaunchDetails.payload != null &&
-            notificationAppLaunchDetails.payload.isNotEmpty)
-        ? int.parse(notificationAppLaunchDetails.payload)
+    _orderID = (notificationAppLaunchDetails.notificationResponse.payload !=
+                null &&
+            notificationAppLaunchDetails
+                .notificationResponse.payload.isNotEmpty)
+        ? int.parse(notificationAppLaunchDetails.notificationResponse.payload)
         : null;
   }
   final RemoteMessage remoteMessage =

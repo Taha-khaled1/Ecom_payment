@@ -42,9 +42,10 @@ class AuthScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: Dimensions.topSpace),
-                  Image.asset(Images.logo_black,
-                      height: 108, width: 120),
-                    SizedBox(height: 20,),
+                  Image.asset(Images.logo_black, height: 108, width: 120),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Stack(
                     clipBehavior: Clip.none,
                     children: [
@@ -92,8 +93,10 @@ class AuthScreen extends StatelessWidget {
                                       Text(
                                         getTranslated('SIGN_IN', context),
                                         style: authProvider.selectedIndex == 0
-                                            ? titilliumSemiBold
-                                            : titilliumRegular,
+                                            ? titilliumSemiBold.copyWith(
+                                                color: Colors.white)
+                                            : titilliumRegular.copyWith(
+                                                color: Colors.white),
                                       ),
                                       Container(
                                         height: 1,
@@ -111,7 +114,6 @@ class AuthScreen extends StatelessWidget {
                                 ),
                                 SizedBox(
                                     width: Dimensions.PADDING_SIZE_EXTRA_LARGE),
-                                    
                                 InkWell(
                                   onTap: () => _pageController.animateToPage(1,
                                       duration: Duration(seconds: 1),
@@ -119,18 +121,30 @@ class AuthScreen extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Text(
-                                          getTranslated(
-                                              'SIGN_UP', context), // Here Asim
-                                          style: authProvider.selectedIndex == 1
-                                              ? titilliumSemiBold
-                                              : titilliumRegular),
+                                        getTranslated(
+                                          'SIGN_UP',
+                                          context,
+                                        ), // Here Asim
+                                        style: authProvider.selectedIndex == 1
+                                            ? titilliumSemiBold.copyWith(
+                                                color: Colors.white.withOpacity(
+                                                  0.5,
+                                                ),
+                                              )
+                                            : titilliumRegular.copyWith(
+                                                color: Colors.white.withOpacity(
+                                                  0.5,
+                                                ),
+                                              ),
+                                      ),
                                       Container(
-                                          height: 1,
-                                          width: 50,
-                                          margin: EdgeInsets.only(top: 8),
-                                          color: authProvider.selectedIndex == 1
-                                              ? Theme.of(context).primaryColor
-                                              : Colors.transparent),
+                                        height: 1,
+                                        width: 50,
+                                        margin: EdgeInsets.only(top: 8),
+                                        color: authProvider.selectedIndex == 1
+                                            ? Theme.of(context).primaryColor
+                                            : Colors.transparent,
+                                      ),
                                     ],
                                   ),
                                 ),

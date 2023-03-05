@@ -167,7 +167,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                   height: 10,
                 ),
                 Container(
-                    margin: EdgeInsets.only(bottom: Dimensions.MARGIN_SIZE_SMALL),
+                    margin:
+                        EdgeInsets.only(bottom: Dimensions.MARGIN_SIZE_SMALL),
                     child: CustomTextField(
                       hintText:
                           getTranslated('ENTER_YOUR_EMAIL_or_mobile', context),
@@ -177,7 +178,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                       controller: _emailController,
                     )),
                 Container(
-                    margin: EdgeInsets.only(bottom: Dimensions.MARGIN_SIZE_DEFAULT),
+                    margin:
+                        EdgeInsets.only(bottom: Dimensions.MARGIN_SIZE_DEFAULT),
                     child: CustomPasswordTextField(
                       hintTxt: getTranslated('ENTER_YOUR_PASSWORD', context),
                       textInputAction: TextInputAction.done,
@@ -208,15 +210,19 @@ class _SignInWidgetState extends State<SignInWidget> {
                             context,
                             MaterialPageRoute(
                                 builder: (_) => ForgetPasswordScreen())),
-                        child: Text(getTranslated('FORGET_PASSWORD', context),
-                            style: titilliumRegular.copyWith(
-                                color: ColorResources.getLightSkyBlue(context))),
+                        child: Text(
+                          getTranslated('FORGET_PASSWORD', context),
+                          style: titilliumRegular.copyWith(
+                            color: Color(0xff2D4379),
+                          ),
+                        ),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 30),
+                  margin:
+                      EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 30),
                   child: Provider.of<AuthProvider>(context).isLoading
                       ? Center(
                           child: CircularProgressIndicator(

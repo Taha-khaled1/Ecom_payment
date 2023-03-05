@@ -8,10 +8,16 @@ class CustomPasswordTextField extends StatefulWidget {
   final FocusNode nextNode;
   final TextInputAction textInputAction;
 
-  CustomPasswordTextField({this.controller, this.hintTxt, this.focusNode, this.nextNode, this.textInputAction});
+  CustomPasswordTextField(
+      {this.controller,
+      this.hintTxt,
+      this.focusNode,
+      this.nextNode,
+      this.textInputAction});
 
   @override
-  _CustomPasswordTextFieldState createState() => _CustomPasswordTextFieldState();
+  _CustomPasswordTextFieldState createState() =>
+      _CustomPasswordTextFieldState();
 }
 
 class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
@@ -28,7 +34,6 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-     
       child: ClipRRect(
         borderRadius: BorderRadius.circular(6),
         child: TextFormField(
@@ -48,13 +53,17 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
             return null;
           },
           decoration: InputDecoration(
-              suffixIcon: IconButton(icon: Icon(_obscureText ? Icons.visibility_off : Icons.visibility), onPressed: _toggle),
+              suffixIcon: IconButton(
+                  icon: Icon(
+                      _obscureText ? Icons.visibility_off : Icons.visibility),
+                  onPressed: _toggle),
               hintText: widget.hintTxt ?? '',
-              contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 15),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 15),
               isDense: true,
               filled: false,
-           //  fillColor: Theme.of(context).highlightColor,
-              hintStyle: titilliumRegular.copyWith(color: Theme.of(context).hintColor),
+              //  fillColor: Theme.of(context).highlightColor,
+              hintStyle: titilliumRegular.copyWith(color: Colors.black),
               border: InputBorder.none),
         ),
       ),

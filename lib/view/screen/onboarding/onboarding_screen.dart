@@ -6,6 +6,7 @@ import 'package:flutter_sixvalley_ecommerce/provider/cart_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/onboarding_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/theme_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
@@ -107,15 +108,18 @@ class OnBoardingScreen extends StatelessWidget {
                                   horizontal: 25, vertical: 5),
                               child: TextButton(
                                 onPressed: () {
-                                   if (!Provider.of<AuthProvider>(context, listen: false)
-                        .isLoading) {
-                      Provider.of<CartProvider>(context, listen: false)
-                          .getCartData();
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (_) => DashBoardScreen()),
-                          (route) => false);
-                    }
+                                  if (!Provider.of<AuthProvider>(context,
+                                          listen: false)
+                                      .isLoading) {
+                                    Provider.of<CartProvider>(context,
+                                            listen: false)
+                                        .getCartData();
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => DashBoardScreen()),
+                                        (route) => false);
+                                  }
                                   // if (Provider.of<OnBoardingProvider>(context,
                                   //             listen: false)
                                   //         .selectedIndex ==
@@ -151,9 +155,10 @@ class OnBoardingScreen extends StatelessWidget {
                             ),
                             GestureDetector(
                               onTap: () {
-                                
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => AuthScreen()));
-                               
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AuthScreen()));
                               },
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
@@ -164,17 +169,41 @@ class OnBoardingScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(15),
                                     border: Border.all()),
                                 child: Center(
-                                    child: Text('Sign in',
-                                        style: titilliumSemiBold.copyWith(
-                                            color: Colors.black,
-                                            fontSize:
-                                                Dimensions.FONT_SIZE_LARGE))),
+                                  child: Text(
+                                    'Sign In',
+                                    style: titilliumSemiBold.copyWith(
+                                      // color: Colors.black,
+                                      fontSize: Dimensions.FONT_SIZE_LARGE,
+                                      foreground: Paint()
+                                        ..shader = LinearGradient(
+                                          colors: [
+                                            ColorResources.SignInColor1,
+                                            ColorResources.SignInColor2
+                                          ],
+                                          end: Alignment.bottomCenter,
+                                          begin: Alignment.topCenter,
+                                        ).createShader(
+                                          Rect.zero,
+                                        ),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                             GestureDetector(
                               onTap: () {
-                                 Provider.of<AuthProvider>(context, listen: false).updateSelectedIndex(1);
-            Navigator.push(context, MaterialPageRoute(builder: (context) => AuthScreen(initialPage: 1)));;
+                                Provider.of<AuthProvider>(context,
+                                        listen: false)
+                                    .updateSelectedIndex(1);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AuthScreen(
+                                      initialPage: 1,
+                                    ),
+                                  ),
+                                );
+                                ;
                               },
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
@@ -182,17 +211,25 @@ class OnBoardingScreen extends StatelessWidget {
                                 margin: EdgeInsets.symmetric(
                                     horizontal: 25, vertical: 5),
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    gradient: LinearGradient(colors: [
-                                      Colors.grey,
-                                      Colors.black,
-                                    ])),
+                                  borderRadius: BorderRadius.circular(15),
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      ColorResources.SignInColor1,
+                                      ColorResources.SignInColor2,
+                                    ],
+                                    end: Alignment.bottomCenter,
+                                    begin: Alignment.topCenter,
+                                  ),
+                                ),
                                 child: Center(
-                                    child: Text('Sign Up',
-                                        style: titilliumSemiBold.copyWith(
-                                            color: Colors.white,
-                                            fontSize:
-                                                Dimensions.FONT_SIZE_LARGE))),
+                                  child: Text(
+                                    'Sign Up',
+                                    style: titilliumSemiBold.copyWith(
+                                      color: Colors.white,
+                                      fontSize: Dimensions.FONT_SIZE_LARGE,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ],

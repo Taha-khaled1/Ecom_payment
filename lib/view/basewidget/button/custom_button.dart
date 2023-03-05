@@ -10,7 +10,11 @@ class CustomButton extends StatelessWidget {
   final String buttonText;
   final bool isBuy;
   final bool isBorder;
-  CustomButton({this.onTap, @required this.buttonText, this.isBuy= false, this.isBorder = false});
+  CustomButton(
+      {this.onTap,
+      @required this.buttonText,
+      this.isBuy = false,
+      this.isBorder = false});
 
   @override
   Widget build(BuildContext context) {
@@ -21,22 +25,34 @@ class CustomButton extends StatelessWidget {
         height: 45,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: ColorResources.getChatIcon(context),
+            // color: ColorResources.getChatIcon(context),
             boxShadow: [
-              BoxShadow(color: Colors.grey.withOpacity(0.2), spreadRadius: 1, blurRadius: 7, offset: Offset(0, 1)), // changes position of shadow
+              BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 1,
+                  blurRadius: 7,
+                  offset: Offset(0, 1)), // changes position of shadow
             ],
-            gradient: (Provider.of<ThemeProvider>(context).darkTheme || onTap == null) ? null : isBuy?
-            LinearGradient(colors: [
-              Color(0xffFE961C),
-              Color(0xffFE961C),
-              Color(0xffFE961C),
-            ]):
-            LinearGradient(  colors: [
-                                  Color(0XFF696969),
-                                  Color(0XFF696969),
-                                  Color.fromARGB(255, 148, 143, 143),
-                                ],),
-            borderRadius: BorderRadius.circular(isBorder? Dimensions.PADDING_SIZE_EXTRA_SMALL : Dimensions.PADDING_SIZE_SMALL)),
+            gradient:
+                (Provider.of<ThemeProvider>(context).darkTheme || onTap == null)
+                    ? null
+                    : isBuy
+                        ? LinearGradient(colors: [
+                            Color(0xffFE961C),
+                            Color(0xffFE961C),
+                            Color(0xffFE961C),
+                          ])
+                        : LinearGradient(
+                            colors: [
+                              ColorResources.SignInColor1,
+                              ColorResources.SignInColor2
+                            ],
+                            end: Alignment.bottomCenter,
+                            begin: Alignment.topCenter,
+                          ),
+            borderRadius: BorderRadius.circular(isBorder
+                ? Dimensions.PADDING_SIZE_EXTRA_SMALL
+                : Dimensions.PADDING_SIZE_SMALL)),
         child: Text(buttonText,
             style: titilliumSemiBold.copyWith(
               fontSize: 16,

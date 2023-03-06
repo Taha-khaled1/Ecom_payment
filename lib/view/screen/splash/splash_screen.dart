@@ -30,19 +30,26 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     bool _firstTime = true;
-    _onConnectivityChanged = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      if(!_firstTime) {
-        bool isNotConnected = result != ConnectivityResult.wifi && result != ConnectivityResult.mobile;
-        isNotConnected ? SizedBox() : ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    _onConnectivityChanged = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) {
+      if (!_firstTime) {
+        bool isNotConnected = result != ConnectivityResult.wifi &&
+            result != ConnectivityResult.mobile;
+        isNotConnected
+            ? SizedBox()
+            : ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: isNotConnected ? Colors.red : Colors.green,
           duration: Duration(seconds: isNotConnected ? 6000 : 3),
           content: Text(
-            isNotConnected ? getTranslated('no_connection', context) : getTranslated('connected', context),
+            isNotConnected
+                ? getTranslated('no_connection', context)
+                : getTranslated('connected', context),
             textAlign: TextAlign.center,
           ),
         ));
-        if(!isNotConnected) {
+        if (!isNotConnected) {
           _route();
         }
       }
@@ -60,24 +67,38 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _route() {
-    Provider.of<SplashProvider>(context, listen: false).initConfig(context).then((bool isSuccess) {
-      if(isSuccess) {
-        Provider.of<SplashProvider>(context, listen: false).initSharedPrefData();
+    Provider.of<SplashProvider>(context, listen: false)
+        .initConfig(context)
+        .then((bool isSuccess) {
+      if (isSuccess) {
+        Provider.of<SplashProvider>(context, listen: false)
+            .initSharedPrefData();
         Timer(Duration(seconds: 1), () {
-          if(Provider.of<SplashProvider>(context, listen: false).configModel.maintenanceMode) {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => MaintenanceScreen()));
-          }else {
-            if (Provider.of<AuthProvider>(context, listen: false).isLoggedIn()) {
-              Provider.of<AuthProvider>(context, listen: false).updateToken(context);
-              Provider.of<ProfileProvider>(context, listen: false).getUserInfo(context);
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => DashBoardScreen()));
+          if (Provider.of<SplashProvider>(context, listen: false)
+              .configModel
+              .maintenanceMode) {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (BuildContext context) => MaintenanceScreen()));
+          } else {
+            if (Provider.of<AuthProvider>(context, listen: false)
+                .isLoggedIn()) {
+              Provider.of<AuthProvider>(context, listen: false)
+                  .updateToken(context);
+              Provider.of<ProfileProvider>(context, listen: false)
+                  .getUserInfo(context);
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (BuildContext context) => DashBoardScreen()));
             } else {
-              if(Provider.of<SplashProvider>(context, listen: false).showIntro()) {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => OnBoardingScreen(
-                  indicatorColor: ColorResources.GREY, selectedIndicatorColor: Theme.of(context).primaryColor,
-                )));
-              }else {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => AuthScreen()));
+              if (Provider.of<SplashProvider>(context, listen: false)
+                  .showIntro()) {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (BuildContext context) => OnBoardingScreen(
+                          indicatorColor: ColorResources.GREY,
+                          selectedIndicatorColor: Color(0xffDAA50F),
+                        )));
+              } else {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (BuildContext context) => AuthScreen()));
               }
             }
           }
@@ -90,28 +111,36 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _globalKey,
-      body: Provider.of<SplashProvider>(context).hasConnection ? Stack(
-        clipBehavior: Clip.none, children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            color: Provider.of<ThemeProvider>(context).darkTheme ? Colors.black : Color(0xffF5F5F5)
-            // child: CustomPaint(
-            //   painter: SplashPainter(),
-            // ),
-          ),
-          Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
+      body: Provider.of<SplashProvider>(context).hasConnection
+          ? Stack(
+              clipBehavior: Clip.none,
               children: [
-                Image.asset(Images.logo_black, height: 170.0, fit: BoxFit.scaleDown,
-                  width: 188.0,),
+                Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    color: Provider.of<ThemeProvider>(context).darkTheme
+                        ? Colors.black
+                        : Color(0xffF5F5F5)
+                    // child: CustomPaint(
+                    //   painter: SplashPainter(),
+                    // ),
+                    ),
+                Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset(
+                        Images.logo_black,
+                        height: 170.0,
+                        fit: BoxFit.scaleDown,
+                        width: 188.0,
+                      ),
+                    ],
+                  ),
+                ),
               ],
-            ),
-          ),
-        ],
-      ) : NoInternetOrDataScreen(isNoInternet: true, child: SplashScreen()),
+            )
+          : NoInternetOrDataScreen(isNoInternet: true, child: SplashScreen()),
     );
   }
-
 }

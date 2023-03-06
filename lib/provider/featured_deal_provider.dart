@@ -10,27 +10,24 @@ class FeaturedDealProvider extends ChangeNotifier {
   FeaturedDealProvider({@required this.featuredDealRepo});
 
   int _featuredDealSelectedIndex;
-  List<Product> _featuredDealProductList =[];
-  List<Product> get featuredDealProductList =>_featuredDealProductList;
+  List<Product> _featuredDealProductList = [];
+  List<Product> get featuredDealProductList => _featuredDealProductList;
   int get featuredDealSelectedIndex => _featuredDealSelectedIndex;
 
   Future<void> getFeaturedDealList(bool reload, BuildContext context) async {
+    ApiResponse apiResponse = await featuredDealRepo.getFeaturedDeal();
+    if (apiResponse.response != null &&
+        apiResponse.response.statusCode == 200 &&
+        apiResponse.response.data.toString() != '{}') {
+      _featuredDealProductList = [];
+      apiResponse.response.data.forEach(
+          (fDeal) => _featuredDealProductList.add(Product.fromJson(fDeal)));
 
-
-
-      ApiResponse apiResponse = await featuredDealRepo.getFeaturedDeal();
-      if (apiResponse.response != null && apiResponse.response.statusCode == 200 && apiResponse.response.data.toString() != '{}') {
-        _featuredDealProductList =[];
-        print('----rrr--->${apiResponse.response.data.toString()}');
-        apiResponse.response.data.forEach((fDeal) => _featuredDealProductList.add(Product.fromJson(fDeal)));
-
-        print('----rrr--->${_featuredDealProductList.length}/${_featuredDealProductList[0].name}');
-        _featuredDealSelectedIndex = 0;
-      } else {
-        ApiChecker.checkApi(context, apiResponse);
-      }
-      notifyListeners();
-
+      _featuredDealSelectedIndex = 0;
+    } else {
+      ApiChecker.checkApi(context, apiResponse);
+    }
+    notifyListeners();
   }
 
   void changeSelectedIndex(int selectedIndex) {

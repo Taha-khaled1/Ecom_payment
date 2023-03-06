@@ -27,7 +27,9 @@ class _LoginRequestScreenState extends State<LoginRequestScreen> {
               'Because you are now in quest mode',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Container(
               width: MediaQuery.of(context).size.width * 0.6,
               height: 48,
@@ -41,11 +43,19 @@ class _LoginRequestScreenState extends State<LoginRequestScreen> {
                       Color(0xffDAA000),
                     ],
                   )),
-                  child: Center(child: Text('Login',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),
-            ),),
+              child: Center(
+                child: Text(
+                  'Login',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.white),
+                ),
+              ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Text(
               'create new account',
               style: TextStyle(

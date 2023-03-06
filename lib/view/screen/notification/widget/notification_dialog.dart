@@ -13,11 +13,11 @@ class NotificationDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0))),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-
           Align(
             alignment: Alignment.centerRight,
             child: IconButton(
@@ -25,38 +25,45 @@ class NotificationDialog extends StatelessWidget {
               onPressed: () => Navigator.of(context).pop(),
             ),
           ),
-
           Container(
-            height: MediaQuery.of(context).size.width-130, width: MediaQuery.of(context).size.width,
-            margin: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_LARGE),
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Theme.of(context).primaryColor.withOpacity(0.20)),
+            height: MediaQuery.of(context).size.width - 130,
+            width: MediaQuery.of(context).size.width,
+            margin:
+                EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_LARGE),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Color(0xffDAA50F).withOpacity(0.20)),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: FadeInImage.assetNetwork(
                 placeholder: Images.placeholder,
-                image: '${Provider.of<SplashProvider>(context, listen: false).baseUrls.notificationImageUrl}/${notificationModel.image}',
-                height: MediaQuery.of(context).size.width-130, width: MediaQuery.of(context).size.width, fit: BoxFit.cover,
+                image:
+                    '${Provider.of<SplashProvider>(context, listen: false).baseUrls.notificationImageUrl}/${notificationModel.image}',
+                height: MediaQuery.of(context).size.width - 130,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.cover,
                 imageErrorBuilder: (c, o, s) => Image.asset(
-                  Images.placeholder, height: MediaQuery.of(context).size.width-130,
-                  width: MediaQuery.of(context).size.width, fit: BoxFit.cover,
+                  Images.placeholder,
+                  height: MediaQuery.of(context).size.width - 130,
+                  width: MediaQuery.of(context).size.width,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
           SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
-
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_LARGE),
+            padding:
+                EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_LARGE),
             child: Text(
               notificationModel.title,
               textAlign: TextAlign.center,
               style: titilliumSemiBold.copyWith(
-                color: Theme.of(context).primaryColor,
+                color: Color(0xffDAA50F),
                 fontSize: Dimensions.FONT_SIZE_LARGE,
               ),
             ),
           ),
-
           Padding(
             padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
             child: Text(
@@ -65,7 +72,6 @@ class NotificationDialog extends StatelessWidget {
               style: titilliumRegular,
             ),
           ),
-
         ],
       ),
     );

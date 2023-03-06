@@ -21,33 +21,29 @@ class _FaqScreenState extends State<FaqScreen> {
     return Scaffold(
       body: Column(
         children: [
-
           CustomAppBar(title: widget.title),
-              Container(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Frequently asked questions',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          'Join our community now to get free updates and also alot of freebies are waiting for you or Contact Support',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(fontSize: 16),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+          Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Frequently asked questions',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Center(
+                  child: Text(
+                    'Join our community now to get free updates and also alot of freebies are waiting for you or Contact Support',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+              ],
+            ),
+          ),
           Provider.of<SplashProvider>(context).configModel.faq != null &&
                   Provider.of<SplashProvider>(context).configModel.faq.length >
                       0
@@ -67,7 +63,7 @@ class _FaqScreenState extends State<FaqScreen> {
                                   children: [
                                     Flexible(
                                         child: ExpansionTile(
-                                      iconColor: Theme.of(context).primaryColor,
+                                      iconColor: Color(0xffDAA50F),
                                       title: Text(
                                           faq.configModel.faq[index].question,
                                           style: robotoBold.copyWith(

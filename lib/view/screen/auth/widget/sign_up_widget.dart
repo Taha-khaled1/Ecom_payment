@@ -168,7 +168,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     }
   }
 
-  String _countryDialCode = "+20";
+  String _countryDialCode = "+972";
   @override
   void initState() {
     super.initState();
@@ -246,7 +246,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                       onChanged: (CountryCode countryCode) {
                         _countryDialCode = countryCode.dialCode;
                       },
-                      initialSelection: '+20',
+                      initialSelection: '+972',
                       favorite: [_countryDialCode],
                       showDropDownButton: true,
                       padding: EdgeInsets.zero,
@@ -310,7 +310,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
               ? Center(
                   child: CircularProgressIndicator(
                     valueColor: new AlwaysStoppedAnimation<Color>(
-                      Theme.of(context).primaryColor,
+                      Color(0xffDAA50F),
                     ),
                   ),
                 )
@@ -339,7 +339,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                   Icon(
                     Icons.arrow_forward,
                     size: 15,
-                    color: Theme.of(context).primaryColor,
+                    color: Color(0xffDAA50F),
                   )
                 ],
               )),

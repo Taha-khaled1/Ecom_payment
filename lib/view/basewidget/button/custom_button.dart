@@ -10,11 +10,13 @@ class CustomButton extends StatelessWidget {
   final String buttonText;
   final bool isBuy;
   final bool isBorder;
+  final Color textColor;
   CustomButton(
       {this.onTap,
       @required this.buttonText,
       this.isBuy = false,
-      this.isBorder = false});
+      this.isBorder = false,
+      this.textColor});
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,9 @@ class CustomButton extends StatelessWidget {
                   blurRadius: 7,
                   offset: Offset(0, 1)), // changes position of shadow
             ],
+            border: isBorder
+                ? Border.all(color: Color(0xffFE961C), width: 1)
+                : Border.all(width: 0, color: Colors.transparent),
             gradient:
                 (Provider.of<ThemeProvider>(context).darkTheme || onTap == null)
                     ? null
@@ -43,10 +48,7 @@ class CustomButton extends StatelessWidget {
                             Color(0xffFE961C),
                           ])
                         : LinearGradient(
-                            colors: [
-                              ColorResources.SignInColor1,
-                              ColorResources.SignInColor2
-                            ],
+                            colors: [Colors.white, Colors.white],
                             end: Alignment.bottomCenter,
                             begin: Alignment.topCenter,
                           ),
@@ -56,7 +58,7 @@ class CustomButton extends StatelessWidget {
         child: Text(buttonText,
             style: titilliumSemiBold.copyWith(
               fontSize: 16,
-              color: Theme.of(context).highlightColor,
+              color: textColor ?? Theme.of(context).highlightColor,
             )),
       ),
     );

@@ -14,23 +14,25 @@ class AllTopSellerScreen extends StatelessWidget {
   AllTopSellerScreen({@required this.topSeller});
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       backgroundColor: ColorResources.getIconBg(context),
       appBar: AppBar(
-        backgroundColor: Provider.of<ThemeProvider>(context).darkTheme ? Colors.black : Theme.of(context).primaryColor,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(
-            bottomRight: Radius.circular(5), bottomLeft: Radius.circular(5))),
+        backgroundColor: Provider.of<ThemeProvider>(context).darkTheme
+            ? Colors.black
+            : Color(0xffDAA50F),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(5),
+                bottomLeft: Radius.circular(5))),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, size: 20, color: ColorResources.WHITE),
+          icon:
+              Icon(Icons.arrow_back_ios, size: 20, color: ColorResources.WHITE),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(getTranslated('top_seller', context),
-            style: titilliumRegular.copyWith(fontSize: 20, color: ColorResources.WHITE)),
-
+            style: titilliumRegular.copyWith(
+                fontSize: 20, color: ColorResources.WHITE)),
       ),
-
       body: Padding(
         padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
         child: TopSellerView(isHomePage: false),

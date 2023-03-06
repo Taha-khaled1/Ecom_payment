@@ -23,6 +23,7 @@ import 'package:flutter_sixvalley_ecommerce/view/screen/brand/all_brand_screen.d
 import 'package:flutter_sixvalley_ecommerce/view/screen/cart/cart_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/category/all_category_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/featureddeal/featured_deal_screen.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/helpcenter/help_center_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/announcement.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/banners_view.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/brand_view.dart';
@@ -38,10 +39,18 @@ import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/products_vie
 import 'package:flutter_sixvalley_ecommerce/view/screen/flashdeal/flash_deal_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/recommended_product_view.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/top_seller_view.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/order/order_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/product/view_all_product_screen.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/profile/profile_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/search/search_screen.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/setting/settings_screen.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/support/support_conversation_screen.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/support/support_ticket_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/topSeller/all_top_seller_screen.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/wishlist/wishlist_screen.dart';
 import 'package:provider/provider.dart';
+
+Color primery = Color(0xffDAA50F);
 
 class HomePage extends StatefulWidget {
   @override
@@ -107,6 +116,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
     List<String> types = [
       getTranslated('new_arrival', context),
       getTranslated('top_product', context),
@@ -114,11 +125,164 @@ class _HomePageState extends State<HomePage> {
       getTranslated('discounted_product', context)
     ];
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: ColorResources.getHomeBg(context),
       resizeToAvoidBottomInset: false,
+      drawer: Drawer(
+        width: 250,
+        backgroundColor: Color(0xffF1F1F1),
+        child: Container(
+          //  alignment: Alignment.center,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            //  mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 25,
+              ),
+              Image.asset('assets/images/Group 2.png'),
+              SizedBox(
+                height: 15,
+              ),
+              ButommDrawer(
+                image: 'assets/images/11.png',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SearchScreen(),
+                    ),
+                  );
+                },
+                text: 'Search',
+              ),
+              ButommDrawer(
+                image: 'assets/images/10.png',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomePage(),
+                    ),
+                  );
+                },
+                text: 'Home',
+              ),
+              ButommDrawer(
+                image: 'assets/images/Vector.png',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AllCategoryScreen(),
+                    ),
+                  );
+                },
+                text: 'Category',
+              ),
+              ButommDrawer(
+                image: 'assets/images/2.png',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SupportTicketScreen(),
+                    ),
+                  );
+                },
+                text: 'Support Ticket',
+              ),
+              ButommDrawer(
+                image: 'assets/images/3.png',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => WishListScreen(),
+                    ),
+                  );
+                },
+                text: 'Favorites',
+              ),
+              ButommDrawer(
+                image: 'assets/images/9.png',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProfileScreen(),
+                    ),
+                  );
+                },
+                text: 'Profile',
+              ),
+              ButommDrawer(
+                image: 'assets/images/4.png',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CartScreen(),
+                    ),
+                  );
+                },
+                text: 'Cart',
+              ),
+              ButommDrawer(
+                image: 'assets/images/5.png',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OrderScreen(),
+                    ),
+                  );
+                },
+                text: 'Orders',
+              ),
+              ButommDrawer(
+                image: 'assets/images/6.png',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HelpCenterScreen(),
+                    ),
+                  );
+                },
+                text: 'FAQ',
+              ),
+              ButommDrawer(
+                image: 'assets/images/7.png',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HelpCenterScreen(),
+                    ),
+                  );
+                },
+                text: 'Contact',
+              ),
+              ButommDrawer(
+                image: 'assets/images/8.png',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SettingsScreen(),
+                    ),
+                  );
+                },
+                text: 'Settings',
+              ),
+            ],
+          ),
+        ),
+      ),
       body: SafeArea(
         child: RefreshIndicator(
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Color(0xffDAA50F),
           onRefresh: () async {
             await _loadData(context, true);
             await Provider.of<FlashDealProvider>(context, listen: false)
@@ -152,34 +316,17 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.only(right: 12.0),
                         child: IconButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => CartScreen(),
-                              ),
-                            );
+                            _scaffoldKey.currentState?.openDrawer();
                           },
-                          icon: Stack(clipBehavior: Clip.none, children: [
-                            Icon(
-                              Icons.menu,
-                              color: Colors.black,
-                            ),
-                            // Image.asset(
-                            //   Images.cart_arrow_down_image,
-                            //   height: Dimensions.ICON_SIZE_DEFAULT,
-                            //   width: Dimensions.ICON_SIZE_DEFAULT,
-                            //   color: ColorResources.getPrimary(context),
-                            // ),
-                            // Positioned(top: -4, right: -4,
-                            //   child: Consumer<CartProvider>(builder: (context, cart, child) {
-                            //     return CircleAvatar(radius: 7, backgroundColor: ColorResources.RED,
-                            //       child: Text(cart.cartList.length.toString(),
-                            //           style: titilliumSemiBold.copyWith(color: ColorResources.WHITE, fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
-                            //           )),
-                            //     );
-                            //   }),
-                            // ),
-                          ]),
+                          icon: Stack(
+                            clipBehavior: Clip.none,
+                            children: [
+                              Icon(
+                                Icons.menu,
+                                color: Colors.black,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -233,7 +380,7 @@ class _HomePageState extends State<HomePage> {
                                     width: 40,
                                     height: 40,
                                     decoration: BoxDecoration(
-                                        // color: Theme.of(context).primaryColor,
+                                        // color: Color(0xffDAA50F),
                                         gradient: LinearGradient(
                                           colors: [
                                             ColorResources.SignInColor1,
@@ -707,6 +854,67 @@ class _HomePageState extends State<HomePage> {
                   : SizedBox(),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class ButommDrawer extends StatelessWidget {
+  const ButommDrawer({
+    Key key,
+    this.text,
+    this.image,
+    this.onTap,
+  }) : super(key: key);
+  final String text, image;
+  final void Function() onTap;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: 37, top: 10),
+      child: InkWell(
+        onTap: onTap,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            image == 'assets/images/Vector.png'
+                ? Padding(
+                    padding: const EdgeInsets.only(
+                      left: 13,
+                      right: 13,
+                      top: 9,
+                      bottom: 9,
+                    ),
+                    child: Image.asset(
+                      image,
+                      width: 20,
+                      height: 20,
+                      fit: BoxFit.fill,
+                    ),
+                  )
+                : Image.asset(
+                    image,
+                    width: 48,
+                    height: 48,
+                    fit: BoxFit.fill,
+                  ),
+            image == 'assets/images/Vector.png'
+                ? SizedBox(
+                    width: 18,
+                  )
+                : SizedBox(
+                    width: 14,
+                  ),
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: 20,
+                color: Color(0xff374151),
+              ),
+            ),
+          ],
         ),
       ),
     );

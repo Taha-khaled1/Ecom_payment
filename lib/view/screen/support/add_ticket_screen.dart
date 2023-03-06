@@ -24,12 +24,12 @@ class _AddTicketScreenState extends State<AddTicketScreen> {
   final TextEditingController _descriptionController = TextEditingController();
   final FocusNode _subjectNode = FocusNode();
   final FocusNode _descriptionNode = FocusNode();
-  final GlobalKey<ScaffoldMessengerState> _scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+  final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
+      GlobalKey<ScaffoldMessengerState>();
 
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -39,61 +39,72 @@ class _AddTicketScreenState extends State<AddTicketScreen> {
       isGuestCheck: true,
       child: ListView(
           physics: BouncingScrollPhysics(),
-          padding: EdgeInsets.all(Dimensions.PADDING_SIZE_LARGE), children: [
-
-        Text(getTranslated('add_new_ticket', context), style: titilliumSemiBold.copyWith(fontSize: 20)),
-        SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_LARGE),
-
-
-        Container(
-          color: ColorResources.getLowGreen(context),
-          margin: EdgeInsets.only(bottom: Dimensions.PADDING_SIZE_LARGE),
-          child: ListTile(
-            leading: Icon(Icons.query_builder, color: ColorResources.getPrimary(context)),
-            title: Text(widget.type, style: robotoBold), onTap: () {},
-        ),
-      ),
-
-        CustomTextField(
-          focusNode: _subjectNode,
-          nextNode: _descriptionNode,
-          textInputAction: TextInputAction.next,
-          hintText: getTranslated('write_your_subject', context),
-          controller: _subjectController,),
-        SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
-
-        CustomTextField(
-          focusNode: _descriptionNode,
-          textInputAction: TextInputAction.newline,
-          hintText: getTranslated('issue_description', context),
-          textInputType: TextInputType.multiline,
-          controller: _descriptionController,
-          maxLine: 5,
-        ),
-        SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_LARGE),
-
-        Provider.of<SupportTicketProvider>(context).isLoading ?
-        Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor)))
-          : Builder(key: _scaffoldKey,
-          builder: (context) => CustomButton(
-            buttonText: getTranslated('submit', context),
-            onTap: () {
-              if (_subjectController.text.isEmpty) {
-                showCustomSnackBar('Subject box should not be empty', context);
-              } else if (_descriptionController.text.isEmpty) {
-                showCustomSnackBar('Description box should not be empty', context);
-              } else {
-                SupportTicketBody supportTicketModel = SupportTicketBody(widget.type,
-                    _subjectController.text, _descriptionController.text);
-                Provider.of<SupportTicketProvider>(context, listen: false).sendSupportTicket(supportTicketModel, callback, context);
-              }
-            }),
-        ),
-      ]),
+          padding: EdgeInsets.all(Dimensions.PADDING_SIZE_LARGE),
+          children: [
+            Text(getTranslated('add_new_ticket', context),
+                style: titilliumSemiBold.copyWith(fontSize: 20)),
+            SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_LARGE),
+            Container(
+              color: ColorResources.getLowGreen(context),
+              margin: EdgeInsets.only(bottom: Dimensions.PADDING_SIZE_LARGE),
+              child: ListTile(
+                leading: Icon(Icons.query_builder,
+                    color: ColorResources.getPrimary(context)),
+                title: Text(widget.type, style: robotoBold),
+                onTap: () {},
+              ),
+            ),
+            CustomTextField(
+              focusNode: _subjectNode,
+              nextNode: _descriptionNode,
+              textInputAction: TextInputAction.next,
+              hintText: getTranslated('write_your_subject', context),
+              controller: _subjectController,
+            ),
+            SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
+            CustomTextField(
+              focusNode: _descriptionNode,
+              textInputAction: TextInputAction.newline,
+              hintText: getTranslated('issue_description', context),
+              textInputType: TextInputType.multiline,
+              controller: _descriptionController,
+              maxLine: 5,
+            ),
+            SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_LARGE),
+            Provider.of<SupportTicketProvider>(context).isLoading
+                ? Center(
+                    child: CircularProgressIndicator(
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(Color(0xffDAA50F))))
+                : Builder(
+                    key: _scaffoldKey,
+                    builder: (context) => CustomButton(
+                        buttonText: getTranslated('submit', context),
+                        onTap: () {
+                          if (_subjectController.text.isEmpty) {
+                            showCustomSnackBar(
+                                'Subject box should not be empty', context);
+                          } else if (_descriptionController.text.isEmpty) {
+                            showCustomSnackBar(
+                                'Description box should not be empty', context);
+                          } else {
+                            SupportTicketBody supportTicketModel =
+                                SupportTicketBody(
+                                    widget.type,
+                                    _subjectController.text,
+                                    _descriptionController.text);
+                            Provider.of<SupportTicketProvider>(context,
+                                    listen: false)
+                                .sendSupportTicket(
+                                    supportTicketModel, callback, context);
+                          }
+                        }),
+                  ),
+          ]),
     );
   }
 
-  void callback (bool isSuccess, String message) {
+  void callback(bool isSuccess, String message) {
     print(message);
     if (isSuccess) {
       _subjectController.text = '';

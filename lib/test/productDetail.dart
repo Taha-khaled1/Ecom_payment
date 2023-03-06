@@ -603,10 +603,9 @@ void _settingModalBottomSheet(context) {
                     height: 173,
                     width: 100,
                     decoration: BoxDecoration(
-                      
-                    image: DecorationImage(
-                      image: AssetImage(Images.grlblackscaf),
-                      fit: BoxFit.cover),
+                      image: DecorationImage(
+                          image: AssetImage(Images.grlblackscaf),
+                          fit: BoxFit.cover),
                     ),
                   ),
                   Padding(
@@ -618,7 +617,9 @@ void _settingModalBottomSheet(context) {
                         Text('Black Dress',
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.w600)),
-                                SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
                         Row(
                           children: [
                             Text('Size:',
@@ -633,7 +634,9 @@ void _settingModalBottomSheet(context) {
                                 )),
                           ],
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Row(
                           children: [
                             Text('Color:',
@@ -648,8 +651,9 @@ void _settingModalBottomSheet(context) {
                                 )),
                           ],
                         ),
-                        
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Row(
                           children: [
                             Text('Price:',
@@ -664,8 +668,9 @@ void _settingModalBottomSheet(context) {
                                 )),
                           ],
                         ),
-                        
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -696,11 +701,9 @@ void _settingModalBottomSheet(context) {
                             )
                           ],
                         ),
-                        
                       ],
                     ),
                   ),
-                  
                 ],
               ),
               Row(
@@ -760,11 +763,8 @@ void _settingModalBottomSheet(context) {
                       ),
                     ),
                   ),
-
                 ],
               )
-              
-              
             ],
           ),
         );

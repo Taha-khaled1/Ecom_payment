@@ -33,7 +33,7 @@ class NotificationScreen extends StatelessWidget {
               return notification.notificationList != null
                   ? notification.notificationList.length != 0
                       ? RefreshIndicator(
-                          backgroundColor: Theme.of(context).primaryColor,
+                          backgroundColor: Color(0xffDAA50F),
                           onRefresh: () async {
                             await Provider.of<NotificationProvider>(context,
                                     listen: false)
@@ -203,7 +203,6 @@ class NotificationScreen extends StatelessWidget {
                 ),
               ]),
         ),
-  
       ]),
     );
   }

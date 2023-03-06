@@ -8,7 +8,8 @@ import 'package:provider/provider.dart';
 
 class SearchFilterBottomSheet extends StatefulWidget {
   @override
-  _SearchFilterBottomSheetState createState() => _SearchFilterBottomSheetState();
+  _SearchFilterBottomSheetState createState() =>
+      _SearchFilterBottomSheetState();
 }
 
 class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
@@ -23,59 +24,68 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
       padding: EdgeInsets.all(Dimensions.PADDING_SIZE_DEFAULT),
       decoration: BoxDecoration(
         color: Theme.of(context).highlightColor,
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
       ),
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-
         Consumer<SearchProvider>(
           builder: (context, search, child) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-
-              SizedBox(child: Row(
-                children: [
-                  Text(getTranslated('PRICE_RANGE', context),
-                      style: titilliumSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE)),
-                    SizedBox(width: Dimensions.PADDING_SIZE_LARGE,),
-
-
-                  Expanded(child: TextField(
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.next,
-                    onSubmitted: (_) => FocusScope.of(context).requestFocus(_lastFocus),
-                    textAlign: TextAlign.center,
-                    maxLines: 1,
-                    focusNode: _firstFocus,
-                    controller: _firstPriceController,
-                    style: titilliumBold.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL),
-                    decoration: new InputDecoration(
-                      hintText: getTranslated('min', context),
-                      border: new OutlineInputBorder(
-                          borderSide: new BorderSide(color: Theme.of(context).primaryColor)),),
+              SizedBox(
+                child: Row(
+                  children: [
+                    Text(getTranslated('PRICE_RANGE', context),
+                        style: titilliumSemiBold.copyWith(
+                            fontSize: Dimensions.FONT_SIZE_LARGE)),
+                    SizedBox(
+                      width: Dimensions.PADDING_SIZE_LARGE,
+                    ),
+                    Expanded(
+                      child: TextField(
+                        keyboardType: TextInputType.number,
+                        textInputAction: TextInputAction.next,
+                        onSubmitted: (_) =>
+                            FocusScope.of(context).requestFocus(_lastFocus),
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        focusNode: _firstFocus,
+                        controller: _firstPriceController,
+                        style: titilliumBold.copyWith(
+                            fontSize: Dimensions.FONT_SIZE_SMALL),
+                        decoration: new InputDecoration(
+                          hintText: getTranslated('min', context),
+                          border: new OutlineInputBorder(
+                              borderSide:
+                                  new BorderSide(color: Color(0xffDAA50F))),
+                        ),
                       ),
                     ),
-
-                  Padding(padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_DEFAULT),
-                      child: Text(getTranslated('to', context)),),
-
-
-                  Expanded(child: Center(
-                    child: TextField(
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.center,
-                      controller: _lastPriceController,
-                      maxLines: 1,
-                      focusNode: _lastFocus,
-                      textInputAction: TextInputAction.done,
-                      style: titilliumBold.copyWith(
-                        fontSize: Dimensions.FONT_SIZE_SMALL,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: Dimensions.PADDING_SIZE_DEFAULT),
+                      child: Text(getTranslated('to', context)),
+                    ),
+                    Expanded(
+                      child: Center(
+                        child: TextField(
+                          keyboardType: TextInputType.number,
+                          textAlign: TextAlign.center,
+                          controller: _lastPriceController,
+                          maxLines: 1,
+                          focusNode: _lastFocus,
+                          textInputAction: TextInputAction.done,
+                          style: titilliumBold.copyWith(
+                            fontSize: Dimensions.FONT_SIZE_SMALL,
                           ),
                           decoration: new InputDecoration(
                             hintText: getTranslated('max', context),
                             border: new OutlineInputBorder(
-                                borderSide: new BorderSide(color: Theme.of(context).primaryColor)),),
+                                borderSide:
+                                    new BorderSide(color: Color(0xffDAA50F))),
+                          ),
                         ),
                       ),
                     ),
@@ -85,19 +95,21 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
               SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
               Divider(),
               SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-
-              Text(getTranslated('SORT_BY', context),
-                style: titilliumSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE),
+              Text(
+                getTranslated('SORT_BY', context),
+                style: titilliumSemiBold.copyWith(
+                    fontSize: Dimensions.FONT_SIZE_LARGE),
               ),
-
-              MyCheckBox(title: getTranslated('latest_products', context), index: 0),
-              MyCheckBox(title: getTranslated('alphabetically_az', context), index: 1),
-              MyCheckBox(title: getTranslated('alphabetically_za', context), index: 2),
-              MyCheckBox(title: getTranslated('low_to_high_price', context), index: 3),
-              MyCheckBox(title: getTranslated('high_to_low_price', context), index: 4),
-
-
-
+              MyCheckBox(
+                  title: getTranslated('latest_products', context), index: 0),
+              MyCheckBox(
+                  title: getTranslated('alphabetically_az', context), index: 1),
+              MyCheckBox(
+                  title: getTranslated('alphabetically_za', context), index: 2),
+              MyCheckBox(
+                  title: getTranslated('low_to_high_price', context), index: 3),
+              MyCheckBox(
+                  title: getTranslated('high_to_low_price', context), index: 4),
               Padding(
                 padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
                 child: CustomButton(
@@ -105,11 +117,13 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
                   onTap: () {
                     double minPrice = 0.0;
                     double maxPrice = 0.0;
-                    if(_firstPriceController.text.isNotEmpty && _lastPriceController.text.isNotEmpty) {
+                    if (_firstPriceController.text.isNotEmpty &&
+                        _lastPriceController.text.isNotEmpty) {
                       minPrice = double.parse(_firstPriceController.text);
                       maxPrice = double.parse(_lastPriceController.text);
                     }
-                    Provider.of<SearchProvider>(context, listen: false).sortSearchList(minPrice, maxPrice);
+                    Provider.of<SearchProvider>(context, listen: false)
+                        .sortSearchList(minPrice, maxPrice);
                     Navigator.pop(context);
                   },
                 ),
@@ -117,7 +131,6 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
             ],
           ),
         ),
-
       ]),
     );
   }
@@ -131,17 +144,19 @@ class MyCheckBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CheckboxListTile(
-      title: Text(title, style: titilliumSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL)),
-      checkColor: Theme.of(context).primaryColor,
+      title: Text(title,
+          style:
+              titilliumSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL)),
+      checkColor: Color(0xffDAA50F),
       activeColor: Colors.transparent,
       value: Provider.of<SearchProvider>(context).filterIndex == index,
       onChanged: (isChecked) {
-        if(isChecked) {
-          Provider.of<SearchProvider>(context, listen: false).setFilterIndex(index);
+        if (isChecked) {
+          Provider.of<SearchProvider>(context, listen: false)
+              .setFilterIndex(index);
         }
       },
       controlAffinity: ListTileControlAffinity.leading,
     );
   }
 }
-

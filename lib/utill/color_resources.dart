@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 class ColorResources {
   static Color getColombiaBlue(BuildContext context) {
     return Provider.of<ThemeProvider>(context).darkTheme
-        ? Color(0xFF678cb5)
-        : Color(0xFF92C6FF);
+        ? Color(0xffDAA50F)
+        : Color(0xffDAA50F);
   }
 
   static Color getLightSkyBlue(BuildContext context) {
@@ -119,8 +119,8 @@ class ColorResources {
 
   static Color getPrimary(BuildContext context) {
     return Provider.of<ThemeProvider>(context).darkTheme
-        ? Color(0xFFf0f0f0)
-        : Theme.of(context).primaryColor;
+        ? Color(0xffDAA50F)
+        : Color(0xffDAA50F);
   }
 
   static Color getSearchBg(BuildContext context) {

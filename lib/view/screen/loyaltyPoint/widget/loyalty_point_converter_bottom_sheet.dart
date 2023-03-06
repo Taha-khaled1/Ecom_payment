@@ -9,106 +9,126 @@ import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/button/custom_button.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/textfield/custom_textfield.dart';
 import 'package:provider/provider.dart';
+
 class LoyaltyPointConverterBottomSheet extends StatefulWidget {
   final double myPoint;
-  const LoyaltyPointConverterBottomSheet({Key key, this.myPoint}) : super(key: key);
+  const LoyaltyPointConverterBottomSheet({Key key, this.myPoint})
+      : super(key: key);
 
   @override
-  State<LoyaltyPointConverterBottomSheet> createState() => _LoyaltyPointConverterBottomSheetState();
+  State<LoyaltyPointConverterBottomSheet> createState() =>
+      _LoyaltyPointConverterBottomSheetState();
 }
 
-class _LoyaltyPointConverterBottomSheetState extends State<LoyaltyPointConverterBottomSheet> {
+class _LoyaltyPointConverterBottomSheetState
+    extends State<LoyaltyPointConverterBottomSheet> {
   TextEditingController _convertPointAmountController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-
-    int exchangeRate = Provider.of<SplashProvider>(context,listen: false).configModel.loyaltyPointExchangeRate;
-    int min = Provider.of<SplashProvider>(context,listen: false).configModel.loyaltyPointMinimumPoint;
+    int exchangeRate = Provider.of<SplashProvider>(context, listen: false)
+        .configModel
+        .loyaltyPointExchangeRate;
+    int min = Provider.of<SplashProvider>(context, listen: false)
+        .configModel
+        .loyaltyPointMinimumPoint;
     return Padding(
-      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: Dimensions.HOME_PAGE_PADDING,vertical: Dimensions.PADDING_SIZE_OVER_LARGE),
-        height: MediaQuery.of(context).size.width-100,
+        padding: EdgeInsets.symmetric(
+            horizontal: Dimensions.HOME_PAGE_PADDING,
+            vertical: Dimensions.PADDING_SIZE_OVER_LARGE),
+        height: MediaQuery.of(context).size.width - 100,
         decoration: BoxDecoration(
           color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.only(
-              topLeft:  Radius.circular(25),
-              topRight: Radius.circular(25)),
+              topLeft: Radius.circular(25), topRight: Radius.circular(25)),
         ),
-        child: Column(children: [
-          Text('${getTranslated('loyalty_point_convert_and_transfer_to_wallet', context)}',
-            maxLines: 2,textAlign: TextAlign.center,
-            style: robotoRegular.copyWith(fontSize: Dimensions.FONT_SIZE_DEFAULT,
-            color: Theme.of(context).hintColor)),
-
-
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: Dimensions.PADDING_SIZE_SMALL),
-            child: Row(mainAxisAlignment:MainAxisAlignment.center,children: [
-              Text('$exchangeRate ${getTranslated('points', context)} = ${PriceConverter.convertPrice(context, 1)}',
-                style: robotoBold.copyWith(color: Theme.of(context).primaryColor, fontSize: Dimensions.FONT_SIZE_LARGE),),
-
-            ],),
-          ),
-          SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_LARGE,),
-
-
-
-          CustomTextField(
-            isBorder: true,
-            controller: _convertPointAmountController,
-            hintText: '0',
-            isPhoneNumber: false,
-            textInputType: TextInputType.number,
-          ),
-
-          SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_LARGE),
-
-          Consumer<WalletTransactionProvider>(
-            builder: (context, convert,_) {
-
-              return convert.isConvert?
-              Container(width: 30,height: 30,color: Theme.of(context).cardColor,
-                child: CircularProgressIndicator(color: Theme.of(context).primaryColor,),):
-              CustomButton(buttonText: '${getTranslated('convert', context)}',
+        child: Column(
+          children: [
+            Text(
+                '${getTranslated('loyalty_point_convert_and_transfer_to_wallet', context)}',
+                maxLines: 2,
+                textAlign: TextAlign.center,
+                style: robotoRegular.copyWith(
+                    fontSize: Dimensions.FONT_SIZE_DEFAULT,
+                    color: Theme.of(context).hintColor)),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  vertical: Dimensions.PADDING_SIZE_SMALL),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '$exchangeRate ${getTranslated('points', context)} = ${PriceConverter.convertPrice(context, 1)}',
+                    style: robotoBold.copyWith(
+                        color: Color(0xffDAA50F),
+                        fontSize: Dimensions.FONT_SIZE_LARGE),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: Dimensions.PADDING_SIZE_EXTRA_LARGE,
+            ),
+            CustomTextField(
               isBorder: true,
-              onTap: (){
-
-                int point = int.parse(_convertPointAmountController.text.trim());
-                if(point< min){
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    behavior: SnackBarBehavior.floating,
-                    backgroundColor:Colors.red,
-                    content: Text('${getTranslated('minimum_exchange_rate_is', context)} $min'),
-                  ));
-
-                }
-                else if(point.toDouble() > widget.myPoint){
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    behavior: SnackBarBehavior.floating,
-                    backgroundColor:Colors.red,
-                    content: Text('${getTranslated('insufficient_point', context)}'),
-                  ));
-
-                }
-                else{
-                  Provider.of<WalletTransactionProvider>(context, listen: false).convertPointToCurrency(context ,point).then((value){
-                    Navigator.pop(context);
-                    Provider.of<ProfileProvider>(context, listen: false).getUserInfo(context);
-                    Provider.of<WalletTransactionProvider>(context, listen: false).getLoyaltyPointList(context,1);
-
-                  });
-                }
-
-              },);
-            }
-          )
-
-
-
-        ],),
+              controller: _convertPointAmountController,
+              hintText: '0',
+              isPhoneNumber: false,
+              textInputType: TextInputType.number,
+            ),
+            SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_LARGE),
+            Consumer<WalletTransactionProvider>(builder: (context, convert, _) {
+              return convert.isConvert
+                  ? Container(
+                      width: 30,
+                      height: 30,
+                      color: Theme.of(context).cardColor,
+                      child: CircularProgressIndicator(
+                        color: Color(0xffDAA50F),
+                      ),
+                    )
+                  : CustomButton(
+                      buttonText: '${getTranslated('convert', context)}',
+                      isBorder: true,
+                      onTap: () {
+                        int point = int.parse(
+                            _convertPointAmountController.text.trim());
+                        if (point < min) {
+                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.red,
+                            content: Text(
+                                '${getTranslated('minimum_exchange_rate_is', context)} $min'),
+                          ));
+                        } else if (point.toDouble() > widget.myPoint) {
+                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.red,
+                            content: Text(
+                                '${getTranslated('insufficient_point', context)}'),
+                          ));
+                        } else {
+                          Provider.of<WalletTransactionProvider>(context,
+                                  listen: false)
+                              .convertPointToCurrency(context, point)
+                              .then((value) {
+                            Navigator.pop(context);
+                            Provider.of<ProfileProvider>(context, listen: false)
+                                .getUserInfo(context);
+                            Provider.of<WalletTransactionProvider>(context,
+                                    listen: false)
+                                .getLoyaltyPointList(context, 1);
+                          });
+                        }
+                      },
+                    );
+            })
+          ],
+        ),
       ),
     );
   }

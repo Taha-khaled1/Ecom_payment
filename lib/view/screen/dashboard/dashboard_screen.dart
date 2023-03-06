@@ -85,7 +85,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     return BarItem(
       outlinedIcon: outlinedicon,
       // Image.asset(icon, color: index == _pageIndex ?
-      // Theme.of(context).primaryColor : Theme.of(context).textTheme.bodyText1.color.withOpacity(0.5),
+      // Color(0xffDAA50F) : Theme.of(context).textTheme.bodyText1.color.withOpacity(0.5),
       //   height: 25, width: 25,
       // ),
       filledIcon: filledicon,

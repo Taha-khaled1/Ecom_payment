@@ -24,41 +24,51 @@ class _WishListScreenState extends State<WishListScreen> {
   @override
   void initState() {
     super.initState();
-    isGuestMode = !Provider.of<AuthProvider>(context, listen: false).isLoggedIn();
+    isGuestMode =
+        !Provider.of<AuthProvider>(context, listen: false).isLoggedIn();
   }
-
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Column(
         children: [
           CustomAppBar(title: getTranslated('wishList', context)),
-
           Expanded(
-            child: isGuestMode ? NotLoggedInWidget() :  Consumer<WishListProvider>(
-              builder: (context, wishListProvider, child) {
-                return wishListProvider.wishList != null ? wishListProvider.wishList.length > 0 ? RefreshIndicator(
-                  backgroundColor: Theme.of(context).primaryColor,
-                  onRefresh: () async {
-                    await  Provider.of<WishListProvider>(context, listen: false).initWishList(
-                      context, Provider.of<LocalizationProvider>(context, listen: false).locale.countryCode,
-                    );
-                  },
-
-                  child: ListView.builder(
-                    padding: EdgeInsets.all(0),
-                    itemCount: wishListProvider.wishList.length,
-                    itemBuilder: (context, index) => WishListWidget(
-                      product: wishListProvider.wishList[index],
-                      index: index,
-                    ),
+            child: isGuestMode
+                ? NotLoggedInWidget()
+                : Consumer<WishListProvider>(
+                    builder: (context, wishListProvider, child) {
+                      return wishListProvider.wishList != null
+                          ? wishListProvider.wishList.length > 0
+                              ? RefreshIndicator(
+                                  backgroundColor: Color(0xffDAA50F),
+                                  onRefresh: () async {
+                                    await Provider.of<WishListProvider>(context,
+                                            listen: false)
+                                        .initWishList(
+                                      context,
+                                      Provider.of<LocalizationProvider>(context,
+                                              listen: false)
+                                          .locale
+                                          .countryCode,
+                                    );
+                                  },
+                                  child: ListView.builder(
+                                    padding: EdgeInsets.all(0),
+                                    itemCount: wishListProvider.wishList.length,
+                                    itemBuilder: (context, index) =>
+                                        WishListWidget(
+                                      product: wishListProvider.wishList[index],
+                                      index: index,
+                                    ),
+                                  ),
+                                )
+                              : NoInternetOrDataScreen(isNoInternet: false)
+                          : WishListShimmer();
+                    },
                   ),
-                ) : NoInternetOrDataScreen(isNoInternet: false): WishListShimmer();
-              },
-            ),
           ),
         ],
       ),
@@ -107,10 +117,7 @@ class FavouritesContainerOffWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16),
                           image: DecorationImage(
                               image: AssetImage(Images.onboarding_screen3),
-                              fit: BoxFit.cover)
-                              
-                              
-                              ),
+                              fit: BoxFit.cover)),
                     ),
                     Container(
                       height: 22,
@@ -245,7 +252,6 @@ class FavouritesContainerOffWidget extends StatelessWidget {
   }
 }
 
-
 class WishListShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -256,20 +262,30 @@ class WishListShimmer extends StatelessWidget {
         return Shimmer.fromColors(
           baseColor: Colors.grey[300],
           highlightColor: Colors.grey[100],
-          enabled: Provider.of<WishListProvider>(context).wishList==null,
+          enabled: Provider.of<WishListProvider>(context).wishList == null,
           child: ListTile(
-            leading: Container(height: 50, width: 50, color: ColorResources.WHITE),
+            leading:
+                Container(height: 50, width: 50, color: ColorResources.WHITE),
             title: Container(height: 20, color: ColorResources.WHITE),
-            subtitle: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Container(height: 10, width: 70, color: ColorResources.WHITE),
-              Container(height: 10, width: 20, color: ColorResources.WHITE),
-              Container(height: 10, width: 50, color: ColorResources.WHITE),
-            ]),
-            trailing: Column(crossAxisAlignment: CrossAxisAlignment.end, mainAxisAlignment: MainAxisAlignment.center, children: [
-              Container(height: 15, width: 15, decoration: BoxDecoration(shape: BoxShape.circle, color: ColorResources.WHITE)),
-              SizedBox(height: 10),
-              Container(height: 10, width: 50, color: ColorResources.WHITE),
-            ]),
+            subtitle: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(height: 10, width: 70, color: ColorResources.WHITE),
+                  Container(height: 10, width: 20, color: ColorResources.WHITE),
+                  Container(height: 10, width: 50, color: ColorResources.WHITE),
+                ]),
+            trailing: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                      height: 15,
+                      width: 15,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, color: ColorResources.WHITE)),
+                  SizedBox(height: 10),
+                  Container(height: 10, width: 50, color: ColorResources.WHITE),
+                ]),
           ),
         );
       },

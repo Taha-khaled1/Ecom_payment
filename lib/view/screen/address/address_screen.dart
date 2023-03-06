@@ -15,9 +15,7 @@ import 'package:provider/provider.dart';
 
 import 'add_new_address_screen.dart';
 
-
 class AddressScreen extends StatefulWidget {
-
   final AddressModel addressModel;
   AddressScreen({this.addressModel});
 
@@ -33,78 +31,99 @@ class _AddressScreenState extends State<AddressScreen> {
     // TODO: implement initState
     super.initState();
 
-    _isLoggedIn = Provider.of<AuthProvider>(context, listen: false).isLoggedIn();
-    if(_isLoggedIn) {
-      Provider.of<LocationProvider>(context, listen: false).initAddressList(context);
+    _isLoggedIn =
+        Provider.of<AuthProvider>(context, listen: false).isLoggedIn();
+    if (_isLoggedIn) {
+      Provider.of<LocationProvider>(context, listen: false)
+          .initAddressList(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: _isLoggedIn ? Consumer<ProfileProvider>(
-          builder: (context, locationProvider, child) {
-            return Column( mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: Container(
-                    padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          getTranslated('saved_address', context),
-                          style: robotoRegular.copyWith(color: ColorResources.getTextTitle(context)),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => AddNewAddressScreen()));
-                          },
-                          child: Row(
-                            children: [
-                              Icon(Icons.add, color: ColorResources.getTextTitle(context)),
-                              Text(
-                                getTranslated('add_new', context),
-                                style: robotoRegular.copyWith(color: ColorResources.getTextTitle(context)),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
-                locationProvider.addressList != null ? locationProvider.addressList.length > 0 ?
-
-                Expanded(
-                  child: RefreshIndicator(
-                    onRefresh: () async {
-                      await Provider.of<ProfileProvider>(context, listen: false).initAddressList(context);
-                    },
-                    backgroundColor: Theme.of(context).primaryColor,
-                    child: Scrollbar(
-                      child: Center(
-                        child: SizedBox(
-                          child: ListView.builder(
-                            padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                            itemCount: locationProvider.addressList.length,
-                            itemBuilder: (context, index) => AddressWidget(
-                              addressModel: locationProvider.addressList[index],
-                              index: index,
+      body: _isLoggedIn
+          ? Consumer<ProfileProvider>(
+              builder: (context, locationProvider, child) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Container(
+                        padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              getTranslated('saved_address', context),
+                              style: robotoRegular.copyWith(
+                                  color: ColorResources.getTextTitle(context)),
                             ),
-                          ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        AddNewAddressScreen()));
+                              },
+                              child: Row(
+                                children: [
+                                  Icon(Icons.add,
+                                      color:
+                                          ColorResources.getTextTitle(context)),
+                                  Text(
+                                    getTranslated('add_new', context),
+                                    style: robotoRegular.copyWith(
+                                        color: ColorResources.getTextTitle(
+                                            context)),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  ),
-                )
-                    : NoInternetOrDataScreen(isNoInternet: false)
-                    : Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor))),
-              ],
-            );
-          },
-        ) : NotLoggedInWidget(),
+                    locationProvider.addressList != null
+                        ? locationProvider.addressList.length > 0
+                            ? Expanded(
+                                child: RefreshIndicator(
+                                  onRefresh: () async {
+                                    await Provider.of<ProfileProvider>(context,
+                                            listen: false)
+                                        .initAddressList(context);
+                                  },
+                                  backgroundColor: Color(0xffDAA50F),
+                                  child: Scrollbar(
+                                    child: Center(
+                                      child: SizedBox(
+                                        child: ListView.builder(
+                                          padding: EdgeInsets.all(
+                                              Dimensions.PADDING_SIZE_SMALL),
+                                          itemCount: locationProvider
+                                              .addressList.length,
+                                          itemBuilder: (context, index) =>
+                                              AddressWidget(
+                                            addressModel: locationProvider
+                                                .addressList[index],
+                                            index: index,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : NoInternetOrDataScreen(isNoInternet: false)
+                        : Center(
+                            child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    Color(0xffDAA50F)))),
+                  ],
+                );
+              },
+            )
+          : NotLoggedInWidget(),
     );
   }
 }

@@ -37,7 +37,7 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(6),
         child: TextFormField(
-          cursorColor: Theme.of(context).primaryColor,
+          cursorColor: Color(0xffDAA50F),
           controller: widget.controller,
           obscureText: _obscureText,
           focusNode: widget.focusNode,

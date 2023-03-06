@@ -196,7 +196,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                       //     // Consumer<AuthProvider>(
                       //     //   builder: (context, authProvider, child) => Checkbox(
                       //     //     checkColor: ColorResources.WHITE,
-                      //     //     activeColor: Theme.of(context).primaryColor,
+                      //     //     activeColor: Color(0xffDAA50F),
                       //     //     value: authProvider.isRemember,
                       //     //     onChanged: authProvider.updateRemember,
                       //     //   ),
@@ -227,7 +227,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                       ? Center(
                           child: CircularProgressIndicator(
                             valueColor: new AlwaysStoppedAnimation<Color>(
-                              Theme.of(context).primaryColor,
+                              Color(0xffDAA50F),
                             ),
                           ),
                         )

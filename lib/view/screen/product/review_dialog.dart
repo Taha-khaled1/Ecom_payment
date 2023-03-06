@@ -33,162 +33,220 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
       padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
       decoration: BoxDecoration(
         color: Theme.of(context).highlightColor,
-        borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(20), topLeft: Radius.circular(20)),
       ),
-      child: Column(mainAxisSize: MainAxisSize.min, mainAxisAlignment: MainAxisAlignment.center, children: [
-
-        Align(
-          alignment: Alignment.topRight,
-          child: IconButton(
-            icon: Icon(Icons.cancel, color: ColorResources.getRed(context)),
-            onPressed: () => Navigator.pop(context),
-          ),
-        ),
-
-        Text(getTranslated('review_your_experience', context), style: titilliumRegular),
-        Divider(height: 5),
-
-        Padding(
-          padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-          child: Row(children: [
-            Expanded(child: Text(getTranslated('your_rating', context),
-                style: robotoBold.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL))),
-            Container(
-              height: 30,
-              padding: EdgeInsets.all(Dimensions.PADDING_SIZE_EXTRA_SMALL),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: ColorResources.getLowGreen(context),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: ListView.builder(
-                itemCount: 5,
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    child: Icon(Icons.star, size: 20,
-                      color: Provider.of<ProductDetailsProvider>(context).rating < (index+1) ?
-                      Theme.of(context).highlightColor : ColorResources.getYellow(context),
-                    ),
-                    onTap: () => Provider.of<ProductDetailsProvider>(context, listen: false).setRating(index+1),
-                  );
-                },
+      child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                icon: Icon(Icons.cancel, color: ColorResources.getRed(context)),
+                onPressed: () => Navigator.pop(context),
               ),
             ),
-          ]),
-        ),
-
-        Padding(
-          padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-          child: CustomTextField(
-            maxLine: 4,
-            hintText: getTranslated('write_your_experience_here', context),
-            controller: _controller,
-            textInputAction: TextInputAction.done,
-            fillColor: ColorResources.getLowGreen(context),
-          ),
-        ),
-
-        Padding(
-          padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-          child: Row(children: [
-            Expanded(child: Text(getTranslated('upload_images', context),
-                style: robotoBold.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL))),
-            SizedBox(
-              height: 40,
-              child: ListView.builder(
-                itemCount: 3,
-                shrinkWrap: true,
-                reverse: true,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.only(right: Dimensions.PADDING_SIZE_SMALL),
-                    child: InkWell(
-                      onTap: () async {
-                        if(index == 0 || _files[index-1].path.isNotEmpty) {
-                          ImagePicker imagePicker = ImagePicker();
-                          XFile pickedFile = await imagePicker.pickImage(source: ImageSource.gallery,
-                              maxWidth: 500, maxHeight: 500, imageQuality: 50);
-                          if(pickedFile != null) {
-                            _files[index] = File(pickedFile.path);
-                            setState(() {});
-                          }
-                        }
-                      },
-                      child: _files[index].path.isEmpty ? Container(
-                        height: 40,
-                        width: 50,
-                        alignment: Alignment.center,
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: <Widget>[
-                            Icon(Icons.cloud_upload_outlined, color: Theme.of(context).primaryColor),
-                            CustomPaint(
-                              size: Size(100, 40),
-                              foregroundPainter: new MyPainter(completeColor: ColorResources.getColombiaBlue(context), width: 2),
-                            ),
-                          ],
+            Text(getTranslated('review_your_experience', context),
+                style: titilliumRegular),
+            Divider(height: 5),
+            Padding(
+              padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+              child: Row(children: [
+                Expanded(
+                    child: Text(getTranslated('your_rating', context),
+                        style: robotoBold.copyWith(
+                            fontSize: Dimensions.FONT_SIZE_SMALL))),
+                Container(
+                  height: 30,
+                  padding: EdgeInsets.all(Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: ColorResources.getLowGreen(context),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: ListView.builder(
+                    itemCount: 5,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        child: Icon(
+                          Icons.star,
+                          size: 20,
+                          color: Provider.of<ProductDetailsProvider>(context)
+                                      .rating <
+                                  (index + 1)
+                              ? Theme.of(context).highlightColor
+                              : ColorResources.getYellow(context),
                         ),
-                      ) : ClipRRect(borderRadius: BorderRadius.circular(5),
-                          child: Image.file(_files[index], height: 50, width: 50, fit: BoxFit.cover)),
-                    ),
-                  );
-                },
+                        onTap: () => Provider.of<ProductDetailsProvider>(
+                                context,
+                                listen: false)
+                            .setRating(index + 1),
+                      );
+                    },
+                  ),
+                ),
+              ]),
+            ),
+            Padding(
+              padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+              child: CustomTextField(
+                maxLine: 4,
+                hintText: getTranslated('write_your_experience_here', context),
+                controller: _controller,
+                textInputAction: TextInputAction.done,
+                fillColor: ColorResources.getLowGreen(context),
               ),
             ),
-          ]),
-        ),
-
-        Provider.of<ProductDetailsProvider>(context).errorText != null ?
-        Text(Provider.of<ProductDetailsProvider>(context).errorText,
-            style: titilliumRegular.copyWith(color: ColorResources.RED)) : SizedBox.shrink(),
-
-        Builder(
-          builder: (context) => !Provider.of<ProductDetailsProvider>(context).isLoading ? Padding(
-            padding: EdgeInsets.all(Dimensions.PADDING_SIZE_LARGE),
-            child: CustomButton(
-              buttonText: getTranslated('submit', context),
-              onTap: () {
-                if(Provider.of<ProductDetailsProvider>(context, listen: false).rating == 0) {
-                  Provider.of<ProductDetailsProvider>(context, listen: false).setErrorText('Add a rating');
-                }else if(_controller.text.isEmpty) {
-                  Provider.of<ProductDetailsProvider>(context, listen: false).setErrorText('Write something');
-                }else {
-                  Provider.of<ProductDetailsProvider>(context, listen: false).setErrorText('');
-                  ReviewBody reviewBody = ReviewBody(
-                    productId: widget.productID,
-                    rating: Provider.of<ProductDetailsProvider>(context, listen: false).rating.toString(),
-                    comment: _controller.text.isEmpty ? '' : _controller.text,
-                  );
-                  Provider.of<ProductDetailsProvider>(context, listen: false).submitReview(reviewBody,
-                      _files, Provider.of<AuthProvider>(context, listen: false).getUserToken()).then((value) {
-                    if(value.isSuccess) {
-                      Navigator.pop(context);
-                      widget.callback();
-                      FocusScopeNode currentFocus = FocusScope.of(context);
-                      if (!currentFocus.hasPrimaryFocus) {
-                        currentFocus.unfocus();
-                      }
-                      _controller.clear();
-                    }else {
-                      Provider.of<ProductDetailsProvider>(context, listen: false).setErrorText(value.message);
-                    }
-                  });
-                }
-              },
+            Padding(
+              padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+              child: Row(children: [
+                Expanded(
+                    child: Text(getTranslated('upload_images', context),
+                        style: robotoBold.copyWith(
+                            fontSize: Dimensions.FONT_SIZE_SMALL))),
+                SizedBox(
+                  height: 40,
+                  child: ListView.builder(
+                    itemCount: 3,
+                    shrinkWrap: true,
+                    reverse: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                            right: Dimensions.PADDING_SIZE_SMALL),
+                        child: InkWell(
+                          onTap: () async {
+                            if (index == 0 ||
+                                _files[index - 1].path.isNotEmpty) {
+                              ImagePicker imagePicker = ImagePicker();
+                              XFile pickedFile = await imagePicker.pickImage(
+                                  source: ImageSource.gallery,
+                                  maxWidth: 500,
+                                  maxHeight: 500,
+                                  imageQuality: 50);
+                              if (pickedFile != null) {
+                                _files[index] = File(pickedFile.path);
+                                setState(() {});
+                              }
+                            }
+                          },
+                          child: _files[index].path.isEmpty
+                              ? Container(
+                                  height: 40,
+                                  width: 50,
+                                  alignment: Alignment.center,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: <Widget>[
+                                      Icon(Icons.cloud_upload_outlined,
+                                          color: Color(0xffDAA50F)),
+                                      CustomPaint(
+                                        size: Size(100, 40),
+                                        foregroundPainter: new MyPainter(
+                                            completeColor:
+                                                ColorResources.getColombiaBlue(
+                                                    context),
+                                            width: 2),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : ClipRRect(
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Image.file(_files[index],
+                                      height: 50,
+                                      width: 50,
+                                      fit: BoxFit.cover)),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ]),
             ),
-          ) : Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor))),
-        ),
-
-      ]),
+            Provider.of<ProductDetailsProvider>(context).errorText != null
+                ? Text(Provider.of<ProductDetailsProvider>(context).errorText,
+                    style: titilliumRegular.copyWith(color: ColorResources.RED))
+                : SizedBox.shrink(),
+            Builder(
+              builder: (context) =>
+                  !Provider.of<ProductDetailsProvider>(context).isLoading
+                      ? Padding(
+                          padding:
+                              EdgeInsets.all(Dimensions.PADDING_SIZE_LARGE),
+                          child: CustomButton(
+                            buttonText: getTranslated('submit', context),
+                            onTap: () {
+                              if (Provider.of<ProductDetailsProvider>(context,
+                                          listen: false)
+                                      .rating ==
+                                  0) {
+                                Provider.of<ProductDetailsProvider>(context,
+                                        listen: false)
+                                    .setErrorText('Add a rating');
+                              } else if (_controller.text.isEmpty) {
+                                Provider.of<ProductDetailsProvider>(context,
+                                        listen: false)
+                                    .setErrorText('Write something');
+                              } else {
+                                Provider.of<ProductDetailsProvider>(context,
+                                        listen: false)
+                                    .setErrorText('');
+                                ReviewBody reviewBody = ReviewBody(
+                                  productId: widget.productID,
+                                  rating: Provider.of<ProductDetailsProvider>(
+                                          context,
+                                          listen: false)
+                                      .rating
+                                      .toString(),
+                                  comment: _controller.text.isEmpty
+                                      ? ''
+                                      : _controller.text,
+                                );
+                                Provider.of<ProductDetailsProvider>(context,
+                                        listen: false)
+                                    .submitReview(
+                                        reviewBody,
+                                        _files,
+                                        Provider.of<AuthProvider>(context,
+                                                listen: false)
+                                            .getUserToken())
+                                    .then((value) {
+                                  if (value.isSuccess) {
+                                    Navigator.pop(context);
+                                    widget.callback();
+                                    FocusScopeNode currentFocus =
+                                        FocusScope.of(context);
+                                    if (!currentFocus.hasPrimaryFocus) {
+                                      currentFocus.unfocus();
+                                    }
+                                    _controller.clear();
+                                  } else {
+                                    Provider.of<ProductDetailsProvider>(context,
+                                            listen: false)
+                                        .setErrorText(value.message);
+                                  }
+                                });
+                              }
+                            },
+                          ),
+                        )
+                      : Center(
+                          child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  Color(0xffDAA50F)))),
+            ),
+          ]),
     );
   }
 }
 
 class MyPainter extends CustomPainter {
-  Color lineColor =  Colors.transparent;
+  Color lineColor = Colors.transparent;
   Color completeColor;
   double width;
   MyPainter({this.completeColor, this.width});
@@ -203,12 +261,13 @@ class MyPainter extends CustomPainter {
 
     Offset center = new Offset(size.width / 2, size.height / 2);
     double radius = min(size.width / 2, size.height / 2);
-    var percent = (size.width *0.001) / 2;
+    var percent = (size.width * 0.001) / 2;
     double arcAngle = 2 * pi * percent;
 
     for (var i = 0; i < 8; i++) {
-      var init = (-pi / 2)*(i/2);
-      canvas.drawArc(new Rect.fromCircle(center: center, radius: radius), init, arcAngle, false, complete);
+      var init = (-pi / 2) * (i / 2);
+      canvas.drawArc(new Rect.fromCircle(center: center, radius: radius), init,
+          arcAngle, false, complete);
     }
   }
 

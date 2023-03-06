@@ -16,7 +16,6 @@ import 'package:shimmer/shimmer.dart';
 
 // ignore: must_be_immutable
 class TopSellerChatScreen extends StatelessWidget {
-
   final TopSellerModel topSeller;
   TopSellerChatScreen({@required this.topSeller});
 
@@ -27,8 +26,9 @@ class TopSellerChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if(isFirstTime) {
-      Provider.of<ChatProvider>(context, listen: false).initChatList(topSeller.id, context);
+    if (isFirstTime) {
+      Provider.of<ChatProvider>(context, listen: false)
+          .initChatList(topSeller.id, context);
 
       isFirstTime = false;
     }
@@ -36,28 +36,43 @@ class TopSellerChatScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorResources.getIconBg(context),
       body: Column(children: [
-
         CustomAppBar(title: topSeller.name),
 
         // Chats
-        Expanded(child: Provider.of<ChatProvider>(context).chatList != null ? Provider.of<ChatProvider>(context).chatList.length != 0 ? ListView.builder(
-          physics: BouncingScrollPhysics(),
-          padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-          itemCount: Provider.of<ChatProvider>(context).chatList.length,
-          reverse: true,
-          itemBuilder: (context, index) {
-            List<ChatModel> chats = Provider.of<ChatProvider>(context).chatList.reversed.toList();
-            return MessageBubble(chat: chats[index], sellerImage: topSeller.image, onProfileTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) => AllTopSellerScreen(topSeller: topSeller)));
-            });
-          },
-        ) : SizedBox.shrink() : ChatShimmer()),
+        Expanded(
+            child: Provider.of<ChatProvider>(context).chatList != null
+                ? Provider.of<ChatProvider>(context).chatList.length != 0
+                    ? ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                        itemCount:
+                            Provider.of<ChatProvider>(context).chatList.length,
+                        reverse: true,
+                        itemBuilder: (context, index) {
+                          List<ChatModel> chats =
+                              Provider.of<ChatProvider>(context)
+                                  .chatList
+                                  .reversed
+                                  .toList();
+                          return MessageBubble(
+                              chat: chats[index],
+                              sellerImage: topSeller.image,
+                              onProfileTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => AllTopSellerScreen(
+                                            topSeller: topSeller)));
+                              });
+                        },
+                      )
+                    : SizedBox.shrink()
+                : ChatShimmer()),
 
         // Bottom TextField
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             /*Provider.of<ChatProvider>(context).imageFile != null ? Padding(
               padding: EdgeInsets.only(left: Dimensions.PADDING_SIZE_DEFAULT),
               child: Stack(
@@ -82,9 +97,11 @@ class TopSellerChatScreen extends StatelessWidget {
                 shadowColor: Colors.grey[200],
                 elevation: 2,
                 margin: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50)),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: Dimensions.PADDING_SIZE_SMALL),
                   child: Row(children: [
                     Expanded(
                       child: TextField(
@@ -95,14 +112,21 @@ class TopSellerChatScreen extends StatelessWidget {
                         expands: true,
                         decoration: InputDecoration(
                           hintText: 'Type here...',
-                          hintStyle: titilliumRegular.copyWith(color: ColorResources.HINT_TEXT_COLOR),
+                          hintStyle: titilliumRegular.copyWith(
+                              color: ColorResources.HINT_TEXT_COLOR),
                           border: InputBorder.none,
                         ),
                         onChanged: (String newText) {
-                          if(newText.isNotEmpty && !Provider.of<ChatProvider>(context, listen: false).isSendButtonActive) {
-                            Provider.of<ChatProvider>(context, listen: false).toggleSendButtonActivity();
-                          }else if(newText.isEmpty && Provider.of<ChatProvider>(context, listen: false).isSendButtonActive) {
-                            Provider.of<ChatProvider>(context, listen: false).toggleSendButtonActivity();
+                          if (newText.isNotEmpty &&
+                              !Provider.of<ChatProvider>(context, listen: false)
+                                  .isSendButtonActive) {
+                            Provider.of<ChatProvider>(context, listen: false)
+                                .toggleSendButtonActivity();
+                          } else if (newText.isEmpty &&
+                              Provider.of<ChatProvider>(context, listen: false)
+                                  .isSendButtonActive) {
+                            Provider.of<ChatProvider>(context, listen: false)
+                                .toggleSendButtonActivity();
                           }
                         },
                       ),
@@ -124,15 +148,22 @@ class TopSellerChatScreen extends StatelessWidget {
                     ),*/
                     InkWell(
                       onTap: () {
-                        if(Provider.of<ChatProvider>(context, listen: false).isSendButtonActive){
-                          MessageBody messageBody = MessageBody( shopId: topSeller.id.toString(), message: _controller.text);
-                          Provider.of<ChatProvider>(context, listen: false).sendMessage(messageBody, context);
+                        if (Provider.of<ChatProvider>(context, listen: false)
+                            .isSendButtonActive) {
+                          MessageBody messageBody = MessageBody(
+                              shopId: topSeller.id.toString(),
+                              message: _controller.text);
+                          Provider.of<ChatProvider>(context, listen: false)
+                              .sendMessage(messageBody, context);
                           _controller.text = '';
                         }
                       },
                       child: Icon(
                         Icons.send,
-                        color: Provider.of<ChatProvider>(context).isSendButtonActive ? Theme.of(context).primaryColor : ColorResources.HINT_TEXT_COLOR,
+                        color: Provider.of<ChatProvider>(context)
+                                .isSendButtonActive
+                            ? Color(0xffDAA50F)
+                            : ColorResources.HINT_TEXT_COLOR,
                         size: Dimensions.ICON_SIZE_DEFAULT,
                       ),
                     ),
@@ -140,7 +171,6 @@ class TopSellerChatScreen extends StatelessWidget {
                 ),
               ),
             ),
-
           ],
         ),
       ]),
@@ -156,29 +186,38 @@ class ChatShimmer extends StatelessWidget {
       shrinkWrap: true,
       reverse: true,
       itemBuilder: (context, index) {
-
-        bool isMe = index%2 == 0;
+        bool isMe = index % 2 == 0;
         return Shimmer.fromColors(
           baseColor: isMe ? Colors.grey[300] : ColorResources.IMAGE_BG,
-          highlightColor: isMe ? Colors.grey[100] : ColorResources.IMAGE_BG.withOpacity(0.9),
+          highlightColor: isMe
+              ? Colors.grey[100]
+              : ColorResources.IMAGE_BG.withOpacity(0.9),
           enabled: Provider.of<ChatProvider>(context).chatList == null,
           child: Row(
-            mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+            mainAxisAlignment:
+                isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
             children: [
-              isMe ? SizedBox.shrink() : InkWell(child: CircleAvatar(child: Icon(Icons.person))),
+              isMe
+                  ? SizedBox.shrink()
+                  : InkWell(child: CircleAvatar(child: Icon(Icons.person))),
               Expanded(
                 child: Container(
-                  margin: isMe ?  EdgeInsets.fromLTRB(50, 5, 10, 5) : EdgeInsets.fromLTRB(10, 5, 50, 5),
+                  margin: isMe
+                      ? EdgeInsets.fromLTRB(50, 5, 10, 5)
+                      : EdgeInsets.fromLTRB(10, 5, 50, 5),
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(10),
-                        bottomLeft: isMe ? Radius.circular(10) : Radius.circular(0),
-                        bottomRight: isMe ? Radius.circular(0) : Radius.circular(10),
+                        bottomLeft:
+                            isMe ? Radius.circular(10) : Radius.circular(0),
+                        bottomRight:
+                            isMe ? Radius.circular(0) : Radius.circular(10),
                         topRight: Radius.circular(10),
                       ),
-                      color: isMe ? ColorResources.IMAGE_BG : ColorResources.WHITE
-                  ),
+                      color: isMe
+                          ? ColorResources.IMAGE_BG
+                          : ColorResources.WHITE),
                   child: Container(height: 20),
                 ),
               ),
@@ -189,4 +228,3 @@ class ChatShimmer extends StatelessWidget {
     );
   }
 }
-

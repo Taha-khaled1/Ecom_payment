@@ -135,7 +135,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: AppConstants.APP_NAME,
       navigatorKey: navigatorKey,
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       theme: Provider.of<ThemeProvider>(context).darkTheme ? dark : light,
       locale: Provider.of<LocalizationProvider>(context).locale,
       localizationsDelegates: [

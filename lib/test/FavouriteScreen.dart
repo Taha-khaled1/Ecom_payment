@@ -52,8 +52,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                   Spacer(),
                   Text(
                     'Favourite',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 20),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                   Spacer()
                 ],
@@ -69,10 +68,8 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                         builder: (context, wishListProvider, child) {
                           return wishListProvider.wishList != null
                               ? wishListProvider.wishList.length > 0
-                                  ? 
-                                  RefreshIndicator(
-                                      backgroundColor:
-                                          Theme.of(context).primaryColor,
+                                  ? RefreshIndicator(
+                                      backgroundColor: Color(0xffDAA50F),
                                       onRefresh: () async {
                                         await Provider.of<WishListProvider>(
                                                 context,
@@ -88,18 +85,17 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                                       },
                                       child: ListView.builder(
                                         padding: EdgeInsets.all(0),
-                                        itemCount: wishListProvider
-                                            .wishList.length,
+                                        itemCount:
+                                            wishListProvider.wishList.length,
                                         itemBuilder: (context, index) =>
                                             FavouritesContainerOffWidget(
-                                          product: wishListProvider
-                                              .wishList[index],
+                                          product:
+                                              wishListProvider.wishList[index],
                                           index: index,
                                         ),
                                       ),
                                     )
-                                  : NoInternetOrDataScreen(
-                                      isNoInternet: false)
+                                  : NoInternetOrDataScreen(isNoInternet: false)
                               : WishListShimmer();
                         },
                       ),
@@ -155,32 +151,41 @@ class FavouritesContainerOffWidget extends StatelessWidget {
                             height: 80),
                       ),
                     ),
-
-                     product.unitPrice!=null && product.discount>0? 
-                    Container(
-                      height: 22,
-                      width: 61,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(11),
-                            topLeft: Radius.circular(11),
-                          ),
-                          gradient: LinearGradient(
-                            begin: Alignment.topRight,
-                            end: Alignment.bottomLeft,
-                            colors: [
-                              Color(0xffDAA50F),
-                              Color(0xffDAA000),
-                            ],
-                          )),
-                      child: Center(
-                        child:Text(product.unitPrice!=null && product.discount != null && product.discountType != null?
-                          PriceConverter.percentageCalculation(context, product.unitPrice, product.discount, product.discountType) : '',
-                            style: titilliumRegular.copyWith(fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
-                                color: Theme.of(context).cardColor),
-                          ),
-                      ),
-                    ):SizedBox(),
+                    product.unitPrice != null && product.discount > 0
+                        ? Container(
+                            height: 22,
+                            width: 61,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  bottomRight: Radius.circular(11),
+                                  topLeft: Radius.circular(11),
+                                ),
+                                gradient: LinearGradient(
+                                  begin: Alignment.topRight,
+                                  end: Alignment.bottomLeft,
+                                  colors: [
+                                    Color(0xffDAA50F),
+                                    Color(0xffDAA000),
+                                  ],
+                                )),
+                            child: Center(
+                              child: Text(
+                                product.unitPrice != null &&
+                                        product.discount != null &&
+                                        product.discountType != null
+                                    ? PriceConverter.percentageCalculation(
+                                        context,
+                                        product.unitPrice,
+                                        product.discount,
+                                        product.discountType)
+                                    : '',
+                                style: titilliumRegular.copyWith(
+                                    fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
+                                    color: Theme.of(context).cardColor),
+                              ),
+                            ),
+                          )
+                        : SizedBox(),
                   ],
                 ),
                 Padding(
@@ -190,7 +195,9 @@ class FavouritesContainerOffWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                   product.name ?? '',maxLines: 1,overflow: TextOverflow.ellipsis,
+                        product.name ?? '',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 15),
                       ),
@@ -205,10 +212,11 @@ class FavouritesContainerOffWidget extends StatelessWidget {
                       ),
                       Spacer(),
                       Text(
-                     PriceConverter.convertPrice(context, product.unitPrice,
-                              discount: product.discount,discountType: product.discountType),
-                              maxLines: 1,overflow: TextOverflow.ellipsis,
-                           
+                        PriceConverter.convertPrice(context, product.unitPrice,
+                            discount: product.discount,
+                            discountType: product.discountType),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 15,
@@ -230,19 +238,29 @@ class FavouritesContainerOffWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     GestureDetector(
-                      onTap: (){
-                         showDialog(context: context, builder: (_) => new CupertinoAlertDialog(
-                                  title: new Text(getTranslated('ARE_YOU_SURE_WANT_TO_REMOVE_WISH_LIST', context)),
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) => new CupertinoAlertDialog(
+                                  title: new Text(getTranslated(
+                                      'ARE_YOU_SURE_WANT_TO_REMOVE_WISH_LIST',
+                                      context)),
                                   actions: <Widget>[
-                                    TextButton(child: Text(getTranslated('YES', context)),
+                                    TextButton(
+                                      child:
+                                          Text(getTranslated('YES', context)),
                                       onPressed: () {
-                                        Provider.of<WishListProvider>(context, listen: false).removeWishList(product.id, index: index);
+                                        Provider.of<WishListProvider>(context,
+                                                listen: false)
+                                            .removeWishList(product.id,
+                                                index: index);
                                         Navigator.of(context).pop();
                                       },
                                     ),
-
-                                    TextButton(child: Text(getTranslated('NO', context)),
-                                      onPressed: ()  => Navigator.of(context).pop(),
+                                    TextButton(
+                                      child: Text(getTranslated('NO', context)),
+                                      onPressed: () =>
+                                          Navigator.of(context).pop(),
                                     ),
                                   ],
                                 ));

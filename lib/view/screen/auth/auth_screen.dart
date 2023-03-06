@@ -103,7 +103,7 @@ class AuthScreen extends StatelessWidget {
                                         width: 40,
                                         margin: EdgeInsets.only(top: 8),
                                         color: authProvider.selectedIndex == 0
-                                            ? Theme.of(context).primaryColor
+                                            ? Color(0xffDAA50F)
                                             : Colors.transparent,
                                       ),
                                     ],
@@ -142,7 +142,7 @@ class AuthScreen extends StatelessWidget {
                                         width: 50,
                                         margin: EdgeInsets.only(top: 8),
                                         color: authProvider.selectedIndex == 1
-                                            ? Theme.of(context).primaryColor
+                                            ? Color(0xffDAA50F)
                                             : Colors.transparent,
                                       ),
                                     ],

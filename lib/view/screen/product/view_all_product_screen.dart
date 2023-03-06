@@ -15,27 +15,32 @@ class AllProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: ColorResources.getHomeBg(context),
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Provider.of<ThemeProvider>(context).darkTheme ?
-        Colors.black : Theme.of(context).primaryColor,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(
-            bottomRight: Radius.circular(5), bottomLeft: Radius.circular(5))),
-        leading: IconButton(icon: Icon(Icons.arrow_back_ios, size: 20,
-            color: ColorResources.WHITE),
+        backgroundColor: Provider.of<ThemeProvider>(context).darkTheme
+            ? Colors.black
+            : Color(0xffDAA50F),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(5),
+                bottomLeft: Radius.circular(5))),
+        leading: IconButton(
+          icon:
+              Icon(Icons.arrow_back_ios, size: 20, color: ColorResources.WHITE),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text(productType == ProductType.FEATURED_PRODUCT ?
-        'Featured Product':'Latest Product',
-            style: titilliumRegular.copyWith(fontSize: 20, color: ColorResources.WHITE)),
+        title: Text(
+            productType == ProductType.FEATURED_PRODUCT
+                ? 'Featured Product'
+                : 'Latest Product',
+            style: titilliumRegular.copyWith(
+                fontSize: 20, color: ColorResources.WHITE)),
       ),
-
       body: SafeArea(
         child: RefreshIndicator(
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Color(0xffDAA50F),
           onRefresh: () async {
             return true;
           },
@@ -43,10 +48,12 @@ class AllProductScreen extends StatelessWidget {
             controller: _scrollController,
             slivers: [
               SliverToBoxAdapter(
-
                 child: Padding(
                   padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                  child: ProductView(isHomePage: false , productType: productType, scrollController: _scrollController),
+                  child: ProductView(
+                      isHomePage: false,
+                      productType: productType,
+                      scrollController: _scrollController),
                 ),
               ),
             ],

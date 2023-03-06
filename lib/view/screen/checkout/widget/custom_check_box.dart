@@ -19,13 +19,16 @@ class CustomCheckBox extends StatelessWidget {
             Checkbox(
               shape: CircleBorder(),
               value: order.paymentMethodIndex == index,
-              activeColor: Theme.of(context).primaryColor,
+              activeColor: Color(0xffDAA50F),
               onChanged: (bool isChecked) => order.setPaymentMethod(index),
             ),
             Expanded(
-              child: Text(title, style: titilliumRegular.copyWith(
-                color: order.paymentMethodIndex == index ? Theme.of(context).textTheme.bodyText1.color : ColorResources.getGainsBoro(context),
-              )),
+              child: Text(title,
+                  style: titilliumRegular.copyWith(
+                    color: order.paymentMethodIndex == index
+                        ? Theme.of(context).textTheme.bodyText1.color
+                        : ColorResources.getGainsBoro(context),
+                  )),
             ),
           ]),
         );

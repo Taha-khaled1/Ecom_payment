@@ -65,7 +65,7 @@ class ProductWidget extends StatelessWidget {
                   ),
                   fit: BoxFit.cover,
                 ),
-                color: Colors.amber,
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(

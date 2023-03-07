@@ -29,11 +29,11 @@
     </queries>
 
     <application
-        android:label="V.I.P Store App"
+        android:label="My WEAR"
         android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

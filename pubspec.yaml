@@ -57,9 +57,16 @@ dependencies:
   flutter_html_table: ^3.0.0-alpha.3
   fluttertoast: ^8.0.9
 
+
 dev_dependencies:
+  flutter_launcher_icons: ^0.12.0
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/Group 2.png"
 
 flutter:
   uses-material-design: true
@@ -67,6 +74,7 @@ flutter:
   assets:
     - assets/images/
     - assets/language/
+    - assets/fonts/ubuntu/
 
   fonts:
     - family: Ubuntu
